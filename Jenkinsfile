@@ -19,5 +19,15 @@ pipeline {
                 sh './gradlew clean build'
             }
         }
-     }
+      
+      stage('CodeAnalysis') 
+         {
+            steps 
+            {
+             withSonarQubeEnv('sonarserver'){
+              sh './gradlew sonarqube -i'
+             }
+          }
+      }
+   }
 }
